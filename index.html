@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Portfolio Giuseppe | Home</title> 
+
+    <link rel="icon" type="image/x-icon" href="tab-image/toeter.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>  
+        
+        
+                        
+        * {    /* java gedeelte voor de menu (niet vergeten, deze moet op elke .html link.) 
+            twee dagen later: deze kan eigelijk ook bij het java script los btw!)*/
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        body, html {   /*  simple */
+            width: 100%;
+            height: 100%;
+            background-color: rgb(251, 251, 251);
+            overflow: hidden;  /*  dit is scroll funti als het goed is*/
+        }
+
+       
+        .menu-btn {    /*knop zelf, voor als hij ergens anders groter moet ofz */
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 35px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 2000; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: rgba(0, 25, 134, 0.586);
+            transition: 0.3s;
+        }
+
+        
+        .menu-btn.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); } /*  animatie voor menu */
+        .menu-btn.open span:nth-child(2) { opacity: 0; }
+        .menu-btn.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+        
+        .menu-overlay {  
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(250, 241, 251, 0.98);
+            z-index: 1500;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .menu-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .menu-overlay a {
+            text-decoration: none;
+            color: rgba(63, 22, 209, 0.477);
+            font-size: 24px;
+            margin: 10px 0;
+            transition: color 0.2s;
+        }
+
+        .menu-overlay a:hover { color: #000dff; }
+
+       
+        .balloon {  /* secret sauce, gif bounce */
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;  /* nog eens naar kijken! */
+            color: black;
+            z-index: 100;
+            /* Small transition for the hover glow effect */
+        }
+
+        .balloon img { /* grote gif */
+            width: 230px;
+            height: auto;
+            transition: filter 0.3s;
+        }
+
+        
+        .balloon:hover img {    /* groen filter */
+            filter: drop-shadow(0 0 20px rgba(199, 255, 146, 0.912));
+        }
+            
+        .balloon span {
+            margin-top: 5px;
+            font-size: 30px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 50px) {
+            .balloon img { width: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-btn" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+                    
+    <div class="menu-overlay" id="menuOverlay">
+        <a href="index.html">Home</a></li>
+        <a href="giuseppe.html">GIUSEPPE</a></li>
+        <a href="motomatrix.html">Motomatrix</a>
+        <a href="soepsiphus.html">Soepsiphus</a>
+        <a href="bokdida.html">Bok Dida</a>
+        <a href="boom.html">Kan je een boom stelen?</a>
+        <a href="andere.html">Andere ding?</a>
+        <a href="posttruth.html">Dj Post truth</a>
+        <a href="shame.html">Wall of shame</a>
+        <a href="friends.html">Friends</a>
+        
+    </div>
+
+    <a href="motomatrix.html" class="balloon" id="gif1">
+        <img src="cursor/motomatrix.gif" alt="Motomatrix">
+        <span>Motomatrix</span>
+    </a>
+
+    <a href="soepsiphus.html" class="balloon" id="gif2">
+        <img src="cursor/soepsiphus.gif" alt="Soepsiphus">
+        <span>Soepsiphus</span>
+    
+
+    <a href="bokdida.html" class="balloon" id="gif3">
+        <img src="cursor/bok.gif" alt="Bok Dida">
+        <span>Bok Dida</span>
+    </a>
+
+    <a href="shame.html" class="balloon" id="gif4">
+        <img src="cursor/muur.gif" alt="Wall of Shame">
+        <span>Wall of Shame</span>
+    </a>
+
+    <a href="posttruth.html" class="balloon" id="gif5">
+        <img src="cursor/djposttruth.gif" alt="Dj Post truth">
+        <span>Dj Post truth</span>
+    </a>
+
+    <a href="giuseppe.html" class="balloon" id="gif6">
+        <img src="cursor/about icon.gif" alt="About">
+        <span>Giuseppe</span>
+    </a>
+
+    <a href="boom.html" class="balloon" id="gif7">
+        <img src="cursor/kan je een boom stelen.gif" alt="Kan je een boom stelen?">
+        <span>Kan je een boom stelen?</span>
+    </a>
+
+   
+       
+   
+
+    <script>
+     
+        const menuBtn = document.getElementById('menuBtn');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            menuOverlay.classList.toggle('active');
+        });
+
+        // de gif bounce 
+        const items = [
+            { id: 'gif1', x: 500, y: 50, dx: 0.4, dy: 2 },
+            { id: 'gif2', x: 200, y: 150, dx: -2, dy: 2 },
+            { id: 'gif3', x: 100, y: 300, dx: 2, dy: -1 },
+            { id: 'gif4', x: 300, y: 400, dx: -1, dy: -2 }
+            ,{ id: 'gif5', x: 200, y: 200, dx: 1.5, dy: 2.5}  
+            ,{ id: 'gif6', x: 110, y: 300, dx: 0.8, dy: 2.9}  
+             ,{ id: 'gif7', x: 450, y: 250, dx: 0.8, dy: 2.9}  
+            
+
+        
+            
+        ];
+
+        function animate() {
+            items.forEach(item => {
+                const el = document.getElementById(item.id);
+                const rect = el.getBoundingClientRect();
+
+                // refresh voor de box van je browser als hij veranderd, 
+                // maybe start positie verandere, zie gif bounce riminder hierboven
+            
+                if (item.x + rect.width >= window.innerWidth || item.x <= 0) {
+                    item.dx *= -1; 
+                }
+                if (item.y + rect.height >= window.innerHeight || item.y <= 0) {
+                    item.dy *= -1; 
+                }
+
+            
+                item.x += item.dx;
+                item.y += item.dy;
+
+                
+                el.style.left = item.x + 'px';
+                el.style.top = item.y + 'px';
+            });
+            requestAnimationFrame(animate);
+        }
+
+       
+        animate();
+    </script>
+</body>
+</html>

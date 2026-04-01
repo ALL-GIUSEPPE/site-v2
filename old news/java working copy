@@ -1,0 +1,70 @@
+// 1. PLAYLIST CONFIGURATION
+const tracks = [
+    { title: "Meta-Irony", artist: "Giuseppe", url: "https://soundcloud.com/user-706471529/meta-irony-an-audio-collage-giuseppe-willemsen" },
+    { title: "Ogenschouw", artist: "Giuseppe", url: "https://soundcloud.com/user-706471529/ogenschouw-collage" }
+];
+let currentTrackIndex = 0;
+
+// 2. SOUNDCLOUD CONTROLS
+const widget = SC.Widget(document.getElementById('sc-player'));
+const trackDisplay = document.getElementById('track-name');
+
+function updatePlayer() {
+    const track = tracks[currentTrackIndex];
+    trackDisplay.innerText = track.title;
+    widget.load(track.url, { auto_play: true });
+}
+
+function togglePlay() { widget.toggle(); }
+function nextTrack() {
+    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+    updatePlayer();
+}
+function prevTrack() {
+    currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+    updatePlayer();
+}
+
+// 3. DRAGGABLE LOGIC
+const ipod = document.getElementById('ipod');
+let active = false;
+let currentX;
+let currentY;
+let initialX;
+let initialY;
+let xOffset = 0;
+let yOffset = 0;
+
+ipod.addEventListener("mousedown", dragStart);
+document.addEventListener("mousemove", drag);
+document.addEventListener("mouseup", dragEnd);
+
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target === ipod || ipod.contains(e.target)) active = true;
+}
+
+function drag(e) {
+    if (active) {
+        e.preventDefault();
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+        setTranslate(currentX, currentY, ipod);
+    }
+}
+
+function setTranslate(xPos, yPos, el) {
+    el.style.transform = `translate(calc(-50% + ${xPos}px), calc(-50% + ${yPos}px))`;
+}
+
+function dragEnd() { active = false; }
+
+// 4. MENU TOGGLE
+function toggleMenu() {
+    const menu = document.getElementById('menu-overlay');
+    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+

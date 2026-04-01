@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOK DIDA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --red: #d32f2f;
+            --light-purple: #e8e9e9; /* The "Amos purple blue" background */
+            --shadow: rgba(0, 0, 0, 0.99);
+        }
+       
+/* Change this in your <style> section */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light-purple);
+            font-family: 'Instrument Serif', serif;
+            overflow-x: hidden;
+            opacity: 2; /* For fade-in effect */
+            transition: opacity 1s ease-in-out;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><circle cx="6" cy="6" r="5" fill="red"/></svg>'), auto;
+        }
+
+        /* 1. Scrolling Header */
+        .marquee-container {
+            background-color: #faa9a9df; ;
+            border: 4px solid var(--red);
+            
+            margin: 0px;
+            padding: 0px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            box-shadow: #c91010;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--red);
+            text-transform: uppercase;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+      
+        .menu-container {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .burger {
+            width: 30px;
+            cursor: pointer;
+        }
+
+        .burger div {
+            height: 3px;
+            background-color: var(--red);
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-links {
+            position: fixed;
+            right: -100%;
+            top: 0;
+            height: 100vh;
+            width: 250px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 20px;
+            gap: 15px;
+            transition: 0.5s;
+            box-shadow: -5px 0 15px var(--shadow);
+            z-index: 999;
+        }
+
+        .nav-links.active { right: 0; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--red);
+            font-size: 1.2rem;
+        }
+
+        
+        .beanie-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 200px;
+        
+            perspective: 1200px; /* For 3D tilt effect */
+        }
+
+        #beanie-anchor {
+            text-decoration: none;
+        }
+
+        #beanie-img {
+    width: 370px;         
+    max-width: 100%;     
+    height: auto;
+    z-index: 90;
+    position: relative;
+    transition: transform 0.2s ease-out; 
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0px 10px 12px #1010327a);
+}
+
+
+        .beanie-text {
+            margin-top: 60px; 
+            text-align: center;
+            max-width: 300px;
+            font-style: italic;
+            color: #333;
+            line-height: 1;
+        }
+
+        .beanie-text h2 {
+            font-style: normal;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    align-items: start; 
+}
+
+.media-item {
+    width: 100%;
+    background: rgba(255,255,255,0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* This is the magic line that keeps the box tight to the content */
+    height: fit-content; 
+}
+
+.media-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--red);
+}
+
+.media-item img {
+    width: 100%;
+    display: block;
+    /* Removed border-radius here because the parent (.media-item) handles it with overflow:hidden */
+}
+
+.video-container {
+    width: 100%;
+    /* Using the modern aspect ratio so the container is exactly the video size */
+    aspect-ratio: 16 / 9; 
+    position: relative;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+      
+        .descriptions-section {
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .marquee-content { font-size: 1.2rem; }
+            .media-grid { padding: 15px; }
+        }
+    </style>
+</head>
+<body onload="document.body.style.opacity='1'">
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - BOK DIDA - 
+        </div>
+    </div>
+
+    <div class="menu-container">
+        <div class="burger" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
+        </div>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="giuseppe.html">GIUSEPPE</a>
+        <a href="motomatrix.html">Motomatrix</a>
+        <a href="soepsiphus.html">Soepsiphus</a>
+        <a href="bokdida.html">Bok Dida</a>
+        <a href="boom.html">Kan je een boom stelen?</a>
+        <a href="andere.html">Andere ding?</a>
+        <a href="posttruth.html">Dj Post truth</a>
+        <a href="shame.html">Wall of shame</a>
+        <a href="friends.html">Friends</a>
+    </nav>
+    
+    <section class="beanie-section">
+        <a href="https://www.instagram.com/bokdida_/#" target="_blank" id="beanie-anchor">
+            <img src="beanie.png" alt="Bok Dida Beanie" id="beanie-img">
+
+            
+        </a>
+        <div class="beanie-text">
+            <h2>BOK DIDA</h2>
+            <p>Duo project together with Pirko; mixing theatre, self made instruments / music and a lot of energy. </p>
+        </div>
+    </section>
+    
+    <section class="media-grid">
+        
+        
+
+        <div class="media-item">
+            <img src="bokdida1.png" alt="Bok Dida Performance">
+        </div>
+
+        <div class="media-item">
+            <img src="bokdida2.png" alt="Bok Dida Group">
+        </div>
+
+
+        <div class="media-item">
+            <img src="bokdida3.png" alt="Bok Dida Group">
+        </div>
+
+        
+        
+
+        
+        <div class="media-item">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/CA0JiplFR5E" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="media-item">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/zw817ZjxBfQ" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        
+
+        <div class="media-item">
+            <div class="video-container">
+                <iframe src="https://www.instagram.com/p/DQWsqRviune/embed" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="media-item">
+            <div class="video-container">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+       
+
+
+    </section>
+
+    <section class="descriptions-section">
+        <h3>KNOK DIDA?</h3>
+        <p>More comming :) soon </p>
+        </section>
+
+        <script>
+            const beanie = document.getElementById('beanie-img');
+
+            function toggleMenu() {
+    const nav = document.getElementById('navLinks');
+    nav.classList.toggle('active');
+}
+            
+            document.addEventListener('mousemove', (e) => {
+                // Find the center of the screen
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                // Calculate how far the mouse is from the center
+                const moveX = (e.clientX - centerX) / 25;
+                const moveY = (e.clientY - centerY) / 25;
+        
+                // Apply a tilt (Rotate) and a slight shift (Translate)
+                // This makes it feel like the beanie is "floating" and looking at the mouse
+                if (beanie) {
+                    beanie.style.transform = `rotateX(${-moveY}deg) rotateY(${moveX}deg) translate(${moveX}px, ${moveY}px)`;
+                }
+
+                
+            });
+        </script>
+</body>
+</html>

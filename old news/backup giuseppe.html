@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Giuseppe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* --- FIXED HAMBURGER LOGIC --- */
+        .menu-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 35px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 3000; /* Must be higher than overlay */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            transition: 0.3s ease;
+        }
+
+        /* Hamburger to X Morph */
+        .menu-btn.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+        .menu-btn.open span:nth-child(2) { opacity: 0; }
+        .menu-btn.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+        /* --- FIXED MENU OVERLAY --- */
+        .menu-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Key Fix: use pointer-events to prevent ghost blocking */
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; 
+            transition: all 0.4s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+
+        .menu-overlay a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            margin: 15px 0;
+            transition: 0.2s;
+        }
+
+        .menu-overlay a:hover { color: #00ff00; }
+
+        /* --- CONTENT LAYOUT --- */
+        .container {
+            display: flex;
+            width: 85%;
+            max-width: 1100px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .image-side { flex: 1; display: flex; justify-content: center; }
+        .image-side img {
+            max-width: 450px;
+            width: 100%;
+            height: auto;
+            /* Keeps that raw 'cutout' look from your photo */
+            filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
+        }
+
+        .text-side { flex: 1; }
+        .text-side h2 { font-size: 28px; margin-bottom: 20px; }
+        .text-side p { font-size: 18px; line-height: 1.6; }
+
+        /* --- SOCIALS (Bottom Right) --- */
+        .socials {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .socials a {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            border: 1px solid white;
+            padding: 6px 12px;
+            transition: 0.3s;
+        }
+
+        .socials a:hover {
+            background: white;
+            color: black;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Responsive Mobile Layout */
+        @media (max-width: 768px) {
+            body { overflow-y: auto; }
+            .container { flex-direction: column; padding: 100px 20px; }
+            .image-side img { max-width: 300px; }
+            .text-side { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-btn" id="menuBtn">
+        <span></span><span></span><span></span>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <a href="index.html">Home</a></li>
+        <a href="giuseppe.html">GIUSEPPE</a></li>
+        <a href="motomatrix.html">Motomatrix</a>
+        <a href="soepsiphus.html">Soepsiphus</a>
+        <a href="bokdida.html">Bok Dida</a>
+        <a href="boom.html">Kan je een boom stelen?</a>
+        <a href="andere.html">Andere ding?</a>
+        <a href="posttruth.html">Dj Post truth</a>
+        <a href="shame.html">Wall of shame</a>
+        <a href="friends.html">Friends</a>
+        
+    </div>
+
+    <main class="container">
+        <div class="image-side">
+            <img src="cursor/giuseppe-loop.gif" alt="Giuseppe">
+        </div>
+
+        <div class="text-side">
+            <h2>About:</h2>
+            <p>
+                Giuseppe also called giuso is like a labubu.
+            </p>
+        </div>
+    </main>
+
+    <div class="socials">
+        <a href="mailto:your@email.com">Email</a>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="#">Social</a>
+    </div>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        // Professional Toggle Function
+        menuBtn.onclick = function() {
+            menuBtn.classList.toggle('open');
+            menuOverlay.classList.toggle('active');
+        };
+
+        // Close menu if a link is clicked
+        const navLinks = document.querySelectorAll('.menu-overlay a');
+        navLinks.forEach(link => {
+            link.onclick = () => {
+                menuBtn.classList.remove('open');
+                menuOverlay.classList.remove('active');
+            };
+        });
+    </script>
+</body>
+</html>

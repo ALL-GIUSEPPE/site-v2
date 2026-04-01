@@ -1,0 +1,21 @@
+<div id="ipod-group" class="draggable-wrapper">
+    <div id="ipod" class="ipod-body">
+        <div class="screen">
+            <div class="screen-header"><span>iPod</span><span>38% 🔋</span></div>
+            <div class="screen-content">
+                <p style="font-size: 10px; margin: 0;">Now Playing</p>
+                <h2 id="track-name" style="font-size: 16px; margin: 5px 0;">Meta-Irony</h2>
+                <p id="artist-name" style="font-size: 12px; margin: 0;">Giuseppe Willemsen</p>
+            </div>
+        </div>
+        <div class="wheel" id="click-wheel">
+             </div>
+    </div>
+
+    <div class="ipod-description">
+        <h3>PLAYER</h3>
+        <p>You can press play on the ipod<br>
+           to listen to some of my dj sets<br>
+           and audio compilations</p>
+    </div>
+</div>

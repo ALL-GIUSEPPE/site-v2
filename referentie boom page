@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kan je een boom stelen?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+            height: 100vh;
+        }
+
+        /* --- FIXED INTERNAL SHADOW & LENS --- */
+        .lens-container {
+            position: relative;
+            width: 80vw;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+            
+            /* INTERNAL SHADOW (The "Inset" Fix) */
+            /* This creates the dark vignette and blue glow INSIDE the circle */
+            box-shadow: 
+                inset 0 0 80px rgba(0, 0, 0, 1), 
+                inset 0 0 30px rgba(0, 50, 255, 0.6);
+        }
+
+        /* --- ZOOM CONTROL --- */
+        /* Change the scale(2.0) below to zoom in/out of the starting frame */
+        .video-wrapper {
+            width: 100%;
+            height: 100%;
+            transition: transform 1.2s ease;
+            transform: scale(2.0); /* Adjust this number to zoom the thumbnail */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* --- ANIMATION TO FULLSCREEN --- */
+        .zoomed-in .lens-container {
+            width: 100vw;
+            max-width: none;
+            height: 100vh;
+            border-radius: 0%;
+            box-shadow: inset 0 0 0 rgba(0,0,0,0); /* Remove shadow when playing */
+        }
+
+        .zoomed-in .video-wrapper {
+            transform: scale(1.0); /* Video goes to normal size */
+        }
+
+        /* --- BLINKING TEXT --- */
+        .press-play {
+            margin-top: 30px;
+            font-size: 16px;
+            animation: blink 1.5s infinite;
+            letter-spacing: 3px;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="video-section" id="videoSection">
+        <div class="lens-container" id="lens">
+            <div class="video-wrapper">
+                <iframe id="vimeoPlayer" 
+                    src="https://player.vimeo.com/video/1093477983?api=1&background=1&title=0&byline=0&portrait=0&muted=0" 
+                    frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        <div class="press-play" id="pressPlay">PRESS PLAY</div>
+    </div>
+
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script>
+        const lens = document.getElementById('lens');
+        const videoSection = document.getElementById('videoSection');
+        const pressPlay = document.getElementById('pressPlay');
+        const player = new Vimeo.Player(document.getElementById('vimeoPlayer'));
+
+        lens.onclick = function() {
+            videoSection.classList.add('zoomed-in');
+            pressPlay.classList.add('hidden');
+            player.play();
+        };
+
+        player.on('ended', function() {
+            videoSection.classList.remove('zoomed-in');
+            pressPlay.classList.remove('hidden');
+            player.unload(); // Resets to starting frame
+        });
+    </script>
+</body>
+</html>

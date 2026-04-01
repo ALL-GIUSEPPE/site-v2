@@ -1,0 +1,29 @@
+old 
+
+
+
+
+.ipod-body {
+    width: 249px; /* Adjust based on your PNG size */
+    height: 410px;
+    background: url('ipod.png') no-repeat center center;
+    background-size: contain;
+    position: relative;
+    flex-shrink: 0; /* Prevents the iPod from getting squashed */
+    filter: drop-shadow(15px 15px 10px rgba(1, 97, 66, 0.4));
+    
+
+new
+
+/* IPOD DESIGN */
+.ipod-body {
+    width: 249px; 
+    height: 410px;
+    background: url('ipod.png') no-repeat center center;
+    background-size: contain;
+    position: relative;
+    flex-shrink: 0; 
+    filter: drop-shadow(15px 15px 10px rgba(1, 97, 66, 0.4));
+    
+    /* REMOVE OR COMMENT OUT THIS LINE BELOW: */
+    /* border: 1px solid rgba(255,255,255,0.2); */ 

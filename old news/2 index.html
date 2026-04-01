@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 1. RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            overflow: hidden; /* Keeps balloons inside the viewport */
+        }
+
+        /* 2. THE HAMBURGER (Fixed Top Right) */
+        .menu-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-btn span {
+            display: block;
+            height: 4px;
+            width: 100%;
+            background: black;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* 3. THE FLOATING CANVAS */
+        .viewport {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* 4. INDIVIDUAL BALLOON ITEMS */
+        .balloon {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            transition: transform 0.2s ease;
+        }
+
+        .balloon img {
+            width: 150px; /* Adjust size here */
+            height: 150px;
+            object-fit: contain;
+            transition: filter 0.3s, transform 0.3s;
+        }
+
+        /* The Green Glow Feature */
+        .balloon:hover img {
+            filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.8));
+            transform: scale(1.1);
+        }
+
+        .balloon span {
+            margin-top: 8px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2px 5px;
+        }
+
+        /* 5. THE FLOATING ANIMATION LOGIC */
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(2deg); }
+            66% { transform: translate(-20px, -30px) rotate(-2deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* Positioning the 4 GIFs specifically */
+        .item-1 { top: 15%; left: 10%; animation: floatAround 7s infinite ease-in-out; }
+        .item-2 { top: 10%; left: 65%; animation: floatAround 9s infinite ease-in-out; }
+        .item-3 { top: 60%; left: 20%; animation: floatAround 8s infinite ease-in-out; }
+        .item-4 { top: 55%; left: 70%; animation: floatAround 10s infinite ease-in-out; }
+
+        /* Responsive for Mobile */
+        @media (max-width: 600px) {
+            .balloon img { width: 100px; height: 100px; }
+            .item-2 { left: 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-btn" onclick="alert('Menu clicked! We will build this overlay next.')">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="viewport">
+        
+        <a href="motomatrix.html" class="balloon item-1">
+            <img src="cursor/motomatrix.gif" alt="Motomatrix">
+            <span>Motomatrix</span>
+        </a>
+
+        <a href="soepsiphus.html" class="balloon item-2">
+            <img src="cursor/soepsiphus.gif" alt="Soepsiphus">
+            <span>Soepsiphus</span>
+        </a>
+
+        <a href="bokdida.html" class="balloon item-3">
+            <img src="cursor/bokdida.gif" alt="Bok Dida">
+            <span>Bok Dida</span>
+        </a>
+
+        <a href="shame.html" class="balloon item-4">
+            <img src="cursor/shame.gif" alt="Wall of Shame">
+            <span>Wall of Shame</span>
+        </a>
+
+    </div>
+
+</body>
+</html>

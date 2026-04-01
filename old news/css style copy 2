@@ -1,0 +1,544 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+}
+
+body {
+    background-color: rgb(189, 24, 24);
+    overflow: hidden; /* Prevents scrollbars while things float */
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Hamburger Styles */
+.menu-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.hamburger {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: rgb(132, 9, 9);
+    transition: 0.3s;
+}
+
+#menu-list {
+    list-style: none;
+    background: rgb(201, 42, 42);
+    position: absolute;
+    right: 0;
+    top: 40px;
+    padding: 20px;
+    border: 1px solid rgb(200, 28, 28);
+    display: none; /* Hidden by default */
+}
+
+#menu-list.active {
+    display: block;
+}
+
+/* Floating GIF Logic */
+.canvas {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.floating-item {
+    position: absolute;
+    text-decoration: none;
+    color: rgb(228, 0, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.floating-item img {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%; /* Makes them feel like bubbles */
+    transition: box-shadow 2s ease-in-out;
+}
+
+/* The Green Glow on Hover */
+.floating-item:hover img {
+    box-shadow: 0 0 20px 10px rgba(255, 0, 106, 0.7);
+    transform: scale(1.1);
+}
+
+.floating-item span {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Balloon Animation */
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(15px, -25px); }
+    100% { transform: translate(0, 0); }
+}
+
+
+
+/* Assigning positions and different speeds for a natural feel */
+.float-1 { 
+    top: 20%; left: 15%; 
+    animation: float 6s infinite ease-in-out; 
+}
+.float-2 { 
+    top: 50%; left: 60%; 
+    animation: float 8s infinite ease-in-out; 
+}
+
+/* Responsive Scaling */
+@media (max-width: 768px) {
+    .floating-item img {
+        width: 100px;
+    }
+}
+
+/* General Styling */
+.post-truth-body {
+    background: #111;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    overflow: hidden; /* Keeps ticker clean */
+}
+
+/* Moving Ticker */
+.ticker-container {
+    width: 100%;
+    background: #ffea00; /* High vis yellow */
+    color: black;
+    padding: 10px 0;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+}
+
+.ticker-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 20s linear infinite;
+}
+
+@keyframes ticker {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+/* GLOBAL */
+.pt-body {
+    background-color: #fff;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    overflow: hidden; /* Prevents scrollbars when dragging ipod */
+    height: 100vh;
+}
+
+/* TICKER */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background: white;
+    padding: 10px 0;
+    border-bottom: 2px solid black;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+.ticker {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+}
+.ticker span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* IPOD DESIGN */
+.ipod-body {
+    width: 280px;
+    height: 460px;
+    background: linear-gradient(135deg, #00a896 0%, #028090 100%); /* Metallic Teal */
+    border-radius: 35px;
+    padding: 20px;
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.3);
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.screen {
+    width: 100%;
+    height: 180px;
+    background: #e0e0e0;
+    border: 4px solid #333;
+    border-radius: 8px;
+    color: #333;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen-header { display: flex; justify-content: space-between; font-size: 12px; border-bottom: 1px solid #999; padding-bottom: 5px; }
+
+.now-playing-label { font-size: 10px; margin-top: 15px; color: #666; }
+#track-name { font-size: 18px; font-weight: bold; margin-top: 5px; }
+#artist-name { font-size: 14px; color: #444; }
+
+/* THE CLICK WHEEL */
+.wheel {
+    width: 200px;
+    height: 200px;
+    background: #f5f5f5;
+    border-radius: 50%;
+    margin: 30px auto 0;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.wheel-label {
+    position: absolute;
+    background: none;
+    border: none;
+    font-family: 'Roboto Mono';
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+}
+
+.menu-btn { top: 15px; left: 50%; transform: translateX(-50%); }
+.play-pause { bottom: 15px; left: 50%; transform: translateX(-50%); }
+.prev-btn { left: 15px; top: 50%; transform: translateY(-50%); }
+.next-btn { right: 15px; top: 50%; transform: translateY(-50%); }
+
+.center-button {
+    width: 70px;
+    height: 70px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* BURGER MENU (Simplified) */
+.burger {
+    position: fixed;
+    top: 20px; right: 20px;
+    z-index: 1000; cursor: pointer;
+}
+.burger div { width: 30px; height: 4px; background: #d1a3cc; margin: 5px; }
+#menu-overlay {
+    display: none; position: fixed; top: 0; left: 0; 
+    width: 100%; height: 100%; background: rgba(255,255,255,0.95);
+    flex-direction: column; align-items: center; justify-content: center; z-index: 999;
+}
+#menu-overlay a { font-size: 2rem; margin: 10px; color: black; text-decoration: none; }
+
+body.friends-page {
+    background-color: #000;
+    color: #0f0; /* Classic hacker green, or change to match your image */
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    overflow-x: hidden;
+    transition: background-color 0.1s ease;
+}
+
+/* Flicker effect class added via JS */
+.flicker {
+    background-color: #1a1a1a !important;
+}
+
+.friends-container {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.friend-link:hover {
+    color: #fff; /* Turns the text white for contrast */
+    text-shadow: 
+        0 0 5px var(--text-color), 
+        0 0 10px var(--text-color), 
+        0 0 20px var(--text-color);
+    transition: text-shadow 0.2s ease-in-out, color 0.2s;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 15px 0;
+    font-size: 1.2rem;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Burger Menu Styles */
+.menu-icon { font-size: 30px; cursor: pointer; position: fixed; top: 20px; left: 20px; z-index: 100; }
+.menu-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 99; flex-direction: column; align-items: center; justify-content: center;
+}
+.menu-overlay a { font-size: 2rem; margin: 10px; }
+
+/* The wrapper that holds both iPod and Text */
+.draggable-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    position: absolute;
+    top: 80%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    z-index: 10;
+}
+
+/* The iPod Body - Using your PNG */
+.ipod-body {
+    width: 3%; /* Adjust to match your PNG aspect ratio */
+    height: 520px;
+    background: url('ipod.png') no-repeat center center;
+    background-size: contain; 
+    position: relative;
+    flex-shrink: 0;
+    opacity: 1;/* Makes it invisible */
+    
+}
+
+/* Positioning the Screen OVER the PNG hole */
+.screen {
+    position: absolute;
+    top: 36%; /* Adjust these pixels until it fits the image screen */
+    left: 37px;
+    width: 235px;
+    height: 182px;
+    background: #e0e0e0;
+    border: 3px solid #333;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Invisible Click Wheel OVER the PNG wheel */
+.wheel {
+    position: absolute;
+    bottom: 60px; /* Adjust until it aligns with the PNG wheel */
+    left: 49%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 200px;
+    border-radius: 50%;
+    background: transparent; 
+    opacity: 0;/* Makes it invisible */
+}
+
+/* Make buttons invisible but clickable */
+.wheel-label, .center-button {
+    opacity: 0; 
+    cursor: pointer; 
+}
+
+/* Description Text Styling */
+.ipod-description {
+    color: black;
+    font-family: 'Roboto Mono', monospace;
+    max-width: 300%;
+}
+
+.ipod-description h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .draggable-wrapper {
+        flex-direction: column; /* Stacks text below the iPod */
+        
+        /* Positioning: push it down and center it */
+        left: 60%; 
+        top: 99%; /* Increase this number (e.g., 70%) to move it further down */
+        transform: translate(-90%, -40%); /* Adjust the second % to fine-tune vertical center */
+        
+        gap: 20px; /* Reduces space between iPod and text on small screens */
+        text-align: center;
+        width: 90%; /* Prevents the group from being wider than the phone screen */
+    }
+
+    .ipod-description {
+        max-width: 100%; /* Allows text to use the full width of the phone */
+    }
+}
+
+  /* @media (max-width: 768px) {
+    .draggable-wrapper {
+        flex-direction: column;
+        left: 0%;
+        flex-direction: column;
+        
+        
+        text-align: center;
+    }
+}
+
+/* This forces the iPod and Text to stay in one horizontal line */
+.draggable-wrapper {
+    display: flex !important;
+    flex-direction: row !important; /* Forces side-by-side */
+    align-items: center;
+    gap: 30px; /* Space between iPod and Text */
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    z-index: 10;
+    width: auto; /* Allows it to shrink-wrap the content */
+    white-space: nowrap; /* Prevents text from wrapping to a new line */
+}
+
+/* Fix the PNG Box size */
+.ipod-body {
+    width: 2%; /* Adjust this to make the iPod smaller or larger */
+    height: 450px; /* Adjust to match the aspect ratio of your PNG */
+    background: url('ipod.png') no-repeat center center;
+    background-size: contain; /* This fits the PNG perfectly inside the box */
+    position: relative;
+    flex-shrink: 0; /* Prevents the iPod from getting squashed */
+}
+
+/* Adjust the Screen position inside the PNG */
+.screen {
+    position: absolute;
+    top: 13%;    /* Adjust % until it fits your specific PNG's screen hole */
+    left: 14%;   /* Adjust % until it fits your specific PNG's screen hole */
+    width: 72%;  /* Adjust % until it fits your specific PNG's screen hole */
+    height: 35%; /* Adjust % until it fits your specific PNG's screen hole */
+    background: #e0e0e0;
+    overflow: hidden;
+    border: 1px solid #999;
+}
+
+/* Styling the text on the right */
+.ipod-description {
+    text-align: right;
+    color: #000;
+    font-family: 'Roboto Mono', monospace;
+    flex-shrink: 10;
+}
+
+.ipod-description h3 {
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.ipod-description p {
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.draggable-wrapper {
+    display: flex !important;
+    flex-direction: row !important; /* Forces side-by-side */
+    align-items: center;
+    gap: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the whole group */
+    cursor: grab;
+    z-index: 100;
+    white-space: nowrap; /* Prevents text from dropping below */
+}
+
+.ipod-body {
+    width: 300px;
+    height: 480px;
+    background: url('ipod.png') no-repeat center center;
+    background-size: contain;
+    position: relative;
+    flex-shrink: 0; /* Prevents the iPod from being squished */
+}
+
+/* Adjusting the screen to sit inside your PNG */
+.screen {
+    position: absolute;
+    top: 12%; 
+    left: 13%;
+    width: 74%;
+    height: 36%;
+    background: #f0f0f0;
+    border: 1px solid #999;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Positioning the invisible buttons over your PNG wheel */
+.wheel {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+}
+
+.wheel-btn, .center-click {
+    position: absolute;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: transparent; /* Hide text, keep hit-box */
+}
+
+/* The text styling */
+.ipod-description {
+    font-family: 'Roboto Mono', monospace;
+    color: black;
+    text-align: right;
+}
+

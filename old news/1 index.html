@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Frontpage</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="menu-container">
+        <div class="hamburger" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul id="menu-list" class="hidden">
+            <li><a href="index.html">Frontpage</a></li>
+            <li><a href="giuseppe.html">GIUSEPPE</a></li>
+            <li><a href="motomatrix.html">Motomatrix</a></li>
+            <li><a href="soepsiphus.html">Soepsiphus</a></li>
+            <li><a href="bokdida.html">Bok Dida</a></li>
+            <li><a href="boom.html">Kan je een boom stelen?</a></li>
+            <li><a href="andere.html">Andere ding?</a></li>
+            <li><a href="posttruth.html">Dj Post truth</a></li>
+            <li><a href="shame.html">Wall of shame</a></li>
+        </ul>
+    </nav>
+
+    <main class="canvas">
+        <a href="motomatrix.html" class="floating-item float-1">
+            <img src="cursor/gif1.gif" alt="Motomatrix">
+            <span>Motomatrix</span>
+        </a>
+
+        <a href="soepsiphus.html" class="floating-item float-2">
+            <img src="cursor/gif2.gif" alt="Soepsiphus">
+            <span>Soepsiphus</span>
+        </a>
+
+        </main>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('menu-list').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

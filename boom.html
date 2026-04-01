@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kan je een boom stelen?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* This creates the circular darkening effect */
+    background: radial-gradient(circle, rgb(0, 2, 20) 40%, rgba(17, 17, 17, 0.583) 100%);
+    z-index: -1; /* Keeps it behind all content */
+    pointer-events: none;
+}
+
+body {
+    background-color: #1a1a1a; /* Base color */
+    /* ... rest of your body styles ... */
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+
+
+        /* --- HAMBURGER MENU --- */
+        .menu-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 35px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .menu-btn span { height: 3px; width: 100%; background: white; transition: 0.3s; }
+        .menu-btn.open span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+        .menu-btn.open span:nth-child(2) { opacity: 0; }
+        .menu-btn.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: 0.4s;
+        }
+        .menu-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
+        .menu-overlay a { text-decoration: none; color: white; font-size: 24px; margin: 15px 0; }
+
+        /* --- FISHEYE VIDEO CONTAINER --- */
+        .video-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 3s cubic-bezier(0.25, 0, 0.15, 1);
+        }
+
+       /* .lens-container {
+            position: relative;
+            width: 80vw;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+   
+            overflow: hidden;
+            cursor: pointer;
+            /* Blue light blur effect from your reference */
+           /* box-shadow: 
+                inset 0 0 80px rgba(0, 0, 0, 1), 
+                inset 0 0 30px rgba(0, 50, 255, 0.6);
+           /* box-shadow:  0 30px 5px rgba(0, 50, 255, 0.4), inset 0 0 50px rgba(0,0,0,0.8);/*
+            transition: all 2s ease-in-out;
+            z-index: 10;
+
+            box-shadow: 
+                inset 0 0 80px rgba(0, 0, 0, 1), 
+                inset 0 0 30px rgba(0, 50, 255, 0.6);
+            
+        }
+                <style>
+    /* ... (keep your previous styles) ... */
+
+    .lens-container {
+        position: relative;
+        width: 80vw;
+        max-width: 500px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+        
+        /* Remove the box-shadow from here, we move it to the pseudo-element */
+    }
+
+    /* THE VIRTUAL LENS LAYER */
+    .lens-container::after {  
+        content: " ";  /* mogelijke titel toevoegen voor video */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit; /* Keeps it a circle */
+        
+        /* The shadow is now on top of the video */
+        box-shadow: 
+            inset 0 0 180px rgb(1, 1, 82), 
+            inset 0 0 180px rgb(0, 0, 0);
+            
+        /* Crucial: lets you click the video underneath */
+        pointer-events: none; 
+        z-index: 20; /* Higher than the video-wrapper */
+        transition: opacity 9.5s ease;
+    }
+
+    /* Hide the shadow overlay when zoomed in */
+    .zoomed-in .lens-container::after {
+        opacity: 0;
+    }
+
+    .video-wrapper {
+        width: 100%;
+        height: 100%;
+        transition: transform 1.2s ease;
+        transform: scale(6.0); /* Tweak this to zoom the initial frame */
+        z-index: 5; /* Lower than the ::after layer */
+    }
+
+    
+
+
+        /* The actual video player */
+        iframe {
+            width: 230%; /* Oversized to create the "zoom" look inside the circle */
+            height: 170%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; /* Prevents interaction until fullscreen */
+            transition: all 1s ease-in-out;
+
+            box-shadow: 
+                inset 0 0 80px rgba(0, 0, 0, 1), 
+                inset 0 0 30px rgba(0, 50, 255, 0.6);
+        }
+        
+
+        /* --- ANIMATION STATES --- */
+        .zoomed-in .lens-container {
+            width: 100vw;
+            max-width: none;
+            height: 100vh;
+            border-radius: 0%;
+           
+           
+        }
+
+        
+
+        .zoomed-in iframe {
+            width: 100%;
+            height: 100%;
+            pointer-events: all;
+        }
+
+        /* --- BLINKING TEXT --- */
+        .press-play {
+            margin-top: 20px;
+            font-size: 18px;
+            letter-spacing: 2px;
+            animation: blink 5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hidden { display: none !important; }
+
+        /* --- EXPLANATION TEXT --- */
+        .explanation {
+            padding: 100px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .explanation h1 { margin-bottom: 20px; font-size: 24px; }
+    </style>
+</head>
+<body>
+
+    <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+    <nav class="menu-overlay" id="menuOverlay">
+        <a href="index.html">Home</a></li>
+        <a href="giuseppe.html">GIUSEPPE</a></li>
+        <a href="motomatrix.html">Motomatrix</a>
+        <a href="soepsiphus.html">Soepsiphus</a>
+        <a href="bokdida.html">Bok Dida</a>
+        <a href="boom.html">Kan je een boom stelen?</a>
+        <a href="andere.html">Andere ding?</a>
+        <a href="posttruth.html">Dj Post truth</a>
+        <a href="shame.html">Wall of shame</a>
+        <a href="friends.html">Friends</a>
+    </nav>
+    
+
+    <div class="video-section" id="videoSection">
+        <div class="lens-container" id="lens">
+            <iframe id="vimeoPlayer" src="https://player.vimeo.com/video/1093477983?api=1&background=0&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="press-play" id="pressPlay">PRESS PLAY or SCROLL DOWNN</div>
+        
+        
+
+
+        
+    </div>
+
+    <div class="explanation">
+        <h1>'Kan je een boom stelen?'</h1>
+        <p>This is a movie I made 2 years ago about cutting down trees and the moral implication.</p>
+    </div>
+
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script>
+        // Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const menuOverlay = document.getElementById('menuOverlay');
+        menuBtn.onclick = () => {
+            menuBtn.classList.toggle('open');
+            menuOverlay.classList.toggle('active');
+        };
+
+        // Fisheye Zoom Logic
+        const lens = document.getElementById('lens');
+        const videoSection = document.getElementById('videoSection');
+        const pressPlay = document.getElementById('pressPlay');
+        const iframe = document.getElementById('vimeoPlayer');
+        const player = new Vimeo.Player(iframe);
+
+        let isZoomed = false;
+
+        lens.onclick = function() {
+            if (!isZoomed) {
+                // Zoom In
+                videoSection.classList.add('zoomed-in');
+                pressPlay.classList.add('hidden');
+                player.play();
+                isZoomed = true;
+            }
+        };
+
+        // Detect when video ends to reverse animation
+        player.on('ended', function() {
+            videoSection.classList.remove('zoomed-in');
+            pressPlay.classList.remove('hidden');
+            isZoomed = false;
+        });
+    </script>
+</body>
+</html>

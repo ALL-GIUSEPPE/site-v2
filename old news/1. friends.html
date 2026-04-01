@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends | Sequential Scramble</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0d0d0d; 
+            --text-color: #00ff41;
+            --font-main: 'Roboto Mono', monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Burger Menu */
+        .menu-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 28px;
+            color: var(--text-color);
+        }
+
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-overlay a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.4rem;
+            margin: 12px;
+            text-transform: uppercase;
+        }
+
+        .menu-overlay a:hover { color: var(--text-color); }
+
+        /* Links List */
+        .friends-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 50px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .friend-item {
+            margin: 10px 0;
+            border-left: 2px solid transparent;
+            transition: border 0.3s;
+        }
+
+        .friend-item:hover {
+            border-left: 2px solid var(--text-color);
+            padding-left: 10px;
+        }
+
+        .friend-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            display: block;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="menu-overlay" id="menuOverlay">
+        <a href="index.html">Home</a>
+        <a href="giuseppe.html">GIUSEPPE</a>
+        <a href="motomatrix.html">Motomatrix</a>
+        <a href="soepsiphus.html">Soepsiphus</a>
+        <a href="bokdida.html">Bok Dida</a>
+        <a href="boom.html">Kan je een boom stelen?</a>
+        <a href="andere.html">Andere ding?</a>
+        <a href="posttruth.html">Dj Post truth</a>
+        <a href="shame.html">Wall of shame</a>
+        <a href="friends.html">Friends</a>
+    </div>
+
+    <h1 style="letter-spacing: 5px;">FRIENDS</h1>
+
+    <div class="friends-list" id="friendsContainer">
+        </div>
+
+<script>
+    const originalUrls = [
+        "https://pirko.nl/", "https://clairensed.jimdosite.com/", "https://www.silkefenna.nl",
+        "https://ilovebadmusic.net", "https://rein.computer", "https://myponylittle.com",
+        "https://jesseandriesse.info", "https://guaveguaveguave.com", "https://hugoremmen.nl",
+        "https://alienheadshitkid.neocities.org", "https://ardemar.art", "https://finnbekkering.com",
+        "https://zelfbailed.com/", "https://dagerblad.club/"
+    ];
+
+    // Create a working copy for the rotation
+    let currentDisplayList = [...originalUrls];
+    const chars = "ABCDEFGHIJKLMOPQRSTUVXYZ0123456789#%&?@$";
+    const container = document.getElementById('friendsContainer');
+    let linkElements = [];
+
+    // 1. Initial Setup
+    function init() {
+        originalUrls.forEach((url, i) => {
+            const div = document.createElement('div');
+            div.className = 'friend-item';
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.className = 'friend-link';
+            a.target = "_blank";
+            a.innerText = url;
+            
+            div.appendChild(a);
+            container.appendChild(div);
+            linkElements.push(a);
+        });
+    }
+
+    // 2. The Scramble Function
+    function scrambleEffect(element, finalTarget) {
+        let iteration = 0;
+        const interval = setInterval(() => {
+            element.innerText = finalTarget.split("")
+                .map((letter, index) => {
+                    if(index < iteration) return finalTarget[index];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                })
+                .join("");
+
+            if(iteration >= finalTarget.length) {
+                clearInterval(interval);
+                element.href = finalTarget; // Update the actual link address
+            }
+            iteration += 1 / 2; // Scramble speed
+        }, 30);
+    }
+
+    // 3. The One-by-One Rotation Logic
+    let trackIndex = 0;
+
+    function rotateOneByOne() {
+        // Find the next URL in the sequence for this specific slot
+        // We shift the master list internally to get the next variation
+        const first = currentDisplayList.shift();
+        currentDisplayList.push(first);
+
+        // Apply scramble only to the current item in the loop
+        scrambleEffect(linkElements[trackIndex], currentDisplayList[trackIndex]);
+
+        // Move to next line for the next 2-second interval
+        trackIndex++;
+        if (trackIndex >= linkElements.length) {
+            trackIndex = 0;
+        }
+    }
+
+    function toggleMenu() {
+        const menu = document.getElementById('menuOverlay');
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    init();
+    // Start the 2-second sequential loop
+    setInterval(rotateOneByOne, 2000);
+</script>
+
+</body>
+</html>

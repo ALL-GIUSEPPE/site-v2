@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ POST TRUTH</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+</head>
+<body class="pt-body">
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>DJ POST TRUTH - COME SEE ME - DJ POST TRUTH - COME SEE ME - DJ POST TRUTH - COME SEE ME - DJ POST TRUTH - COME SEE ME - </span>
+            <span>DJ POST TRUTH - COME SEE ME - DJ POST TRUTH - COME SEE ME - DJ POST TRUTH - COME SEE ME - DJ POST TRUTH - COME SEE ME - </span>
+        </div>
+    </div>
+
+    <div class="nav-container">
+        <div class="burger" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
+        </div>
+        <nav id="menu-overlay">
+            <a href="index.html">HOME</a>
+            <a href="giuseppe.html">GIUSEPPE</a></li>
+            <a href="motomatrix.html">Motomatrix</a>
+            <a href="soepsiphus.html">Soepsiphus</a>
+            <a href="bokdida.html">Bok Dida</a>
+            <a href="boom.html">Kan je een boom stelen?</a>
+            <a href="andere.html">Andere ding?</a>
+            <a href="posttruth.html">Dj Post truth</a>
+            <a href="shame.html">Wall of shame</a>
+            <a href="friends.html">Friends</a>
+            
+        </nav>
+    </div>
+
+    <div id="ipod-group" class="draggable-wrapper">
+        <div id="ipod" class="ipod-body">
+            <div class="screen">
+                <div class="screen-header">
+                    <span>iPod</span>
+                    <span id="battery">38% 🔋</span>
+                </div>
+                <div class="screen-content">
+                    <div class="now-playing-label">Now Playing</div>
+                    <div id="track-name">Meta-Irony</div>
+                    <div id="artist-name">Giuseppe Willemsen</div>
+                </div>
+            </div>
+    
+
+            
+            <div class="wheel" id="click-wheel">
+                <button class="wheel-label menu-btn">MENU</button>
+                <button class="wheel-label prev-btn" onclick="prevTrack()">⏮</button>
+                <button class="wheel-label next-btn" onclick="nextTrack()">⏭</button>
+                <button class="wheel-label play-pause" onclick="togglePlay()">⏯</button>
+                <div class="center-button" onclick="togglePlay()"></div>
+            </div>
+    </div>  
+       
+    
+        <div class="ipod-description">
+            <h3>DJ PT PLAYER</h3>
+            <p> you can press play on the ipod to lisen 
+                too some of my dj sets and audio compilation<br></p>
+        </div>
+         
+    </div>
+    <div class="text-side">
+        <h2>About:</h2>
+        <p>
+           
+        </p>
+    </div>
+
+    <iframe id="sc-player" width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" 
+        src="https://w.soundcloud.com/player/?url=https://soundcloud.com/user-706471529/meta-irony-an-audio-collage-giuseppe-willemsen">
+    </iframe>
+
+    
+
+    <script src="script.js"></script>
+
+    
+</body>
+</html>
+

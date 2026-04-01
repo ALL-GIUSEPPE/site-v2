@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="tab-image/toeter.png">
+    <title>Friends | Matrix List</title>
+
+    <link rel="icon" type="image/x-icon" href="tab-image/toeter.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0d0d0d; 
+            --text-color: #00ff41; 
+            --font-main: 'Roboto Mono', monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.05s ease; 
+        }
+
+       
+        body.flicker {
+            background-color: #1f6001;
+        }
+
+
+        .menu-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 28px;
+            color: var(--text-color);
+        }
+
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-overlay a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.4rem;
+            margin: 12px;
+            text-transform: uppercase;
+            font-family: var(--font-main);
+        }
+
+        
+        .friends-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 50px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .friend-item {
+            margin: 8px 0;
+            height: 1.5rem; 
+        }
+
+        .friend-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1rem;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .friend-link:hover {
+            color: #adf89d;
+        }
+    </style>
+</head>
+<body id="bodyTag">
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="menu-overlay" id="menuOverlay">
+        <a href="index.html">Home</a>
+        <a href="giuseppe.html">GIUSEPPE</a>
+        <a href="motomatrix.html">Motomatrix</a>
+        <a href="soepsiphus.html">Soepsiphus</a>
+        <a href="bokdida.html">Bok Dida</a>
+        <a href="boom.html">Kan je een boom stelen?</a>
+        <a href="andere.html">Andere ding?</a>
+        <a href="posttruth.html">Dj Post truth</a>
+        <a href="shame.html">Wall of shame</a>
+        <a href="friends.html">Friends</a>
+    </div>
+
+    <h1 style="letter-spacing: 5px;">❤️‍🩹 FRIENDS</h1>
+
+    <div class="friends-list" id="friendsContainer"></div>
+
+<script>
+    
+    const masterUrls = [
+         "https://ilovebadmusic.net", "https://pirko.nl", "https://dagerblad.club",
+         "https://rein.computer", "https://silkevanwijngaarden.nl", "https://robinbird.net",
+        "https://myponylittle.com", "https://jesseandriesse.info", "https://guaveguaveguave.com",
+        "https://hugoremmen.nl", "https://alienheadshitkid.neocities.org", "https://ardemar.art",
+        "https://finnbekkering.com", "https://zelfbailed.com", "http://berendbartje.nl",
+        "https://www.estendorp.nl", "https://clairensed.jimdosite.com", "https://worldwildwest.neocities.org",
+        "https://www.timmiebimmie.nl", "https://www.Roxyspikkel.com", "https://www.graffitek.nl", 
+        "https://www.johannvangerwen.com","https://merelvankesteren.netlify.app"
+    ];
+
+    
+    let currentShown = [...masterUrls];
+    
+    const chars = "¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ABCDEFGHIKLMNOPQRSTVXYZ0123456789#%&?@$";
+    const container = document.getElementById('friendsContainer');
+    const body = document.getElementById('bodyTag');
+    let linkElements = [];
+
+   
+    function init() {
+        currentShown.forEach((url, i) => {
+            const div = document.createElement('div');
+            div.className = 'friend-item';
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.className = 'friend-link';
+            a.target = "_blank";
+            a.innerText = url;
+            
+            div.appendChild(a);
+            container.appendChild(div);
+            linkElements.push(a);
+        });
+    }
+
+    
+    function scrambleEffect(element, finalTarget) { //hacker verander teken dingen
+        let iteration = 0;
+        const interval = setInterval(() => {
+            element.innerText = finalTarget.split("")
+                .map((letter, index) => {
+                    if(index < iteration) return finalTarget[index];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                })
+                .join("");
+
+            if(iteration >= finalTarget.length) {
+                clearInterval(interval);
+                element.href = finalTarget; 
+            }
+            iteration += 1 / 2; 
+        }, 25);
+    }
+
+   
+    let trackIndex = 0;
+
+    function rotateOneByOne() {
+        body.classList.add('flicker');
+        setTimeout(() => body.classList.remove('flicker'), 60);
+
+       
+        const first = currentShown.shift();
+        currentShown.push(first);
+
+       
+        scrambleEffect(linkElements[trackIndex], currentShown[trackIndex]);
+
+        trackIndex = (trackIndex + 1) % linkElements.length;
+    }
+
+    function toggleMenu() {
+        const menu = document.getElementById('menuOverlay');
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    init();
+    setInterval(rotateOneByOne, 2000);
+</script>
+
+</body>
+</html>
